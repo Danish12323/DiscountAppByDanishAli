@@ -49,6 +49,20 @@ const Homescreen = ({ navigation }) => {
 
     console.log(historylist);
   };
+
+const checkalready=(a1,a2)=>{
+  var l = historylist.filter((item) => item.OrgAmount == a1 && item.disc==a2 );
+
+if(l.length>0){
+  return true
+}
+else{
+  return false
+}
+}
+
+
+
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
@@ -81,7 +95,12 @@ const Homescreen = ({ navigation }) => {
 
         <View style={{marginTop: 15,backgroundColor:"red"}}>
           <Button
-            disabled={getam == '' || getpm == ''}
+            disabled={(getam == '' || getpm == '')||(
+
+             checkalready(getam,getpm)==true
+
+
+            )}
             title="Save Record"
             onPress={() => saveitem(this)}
           />
