@@ -7,7 +7,7 @@ import {
   Button,
   ScrollView,
   TouchableOpacity,
-  Alert
+  Alert,Modal,
   
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -16,13 +16,16 @@ var historylist = [];
 const Homescreen = ({ navigation }) => {
   const [getam, setam] = useState('');
   const [getpm, setpm] = useState('');
+  const [getscreen,setcreen]=useState(0)
+
   const [getdiscount, setdiscount] = useState(0);
   const [getfinalprice, setfinalprice] = useState(0);
   const [geterror1, seterror1] = useState('');
+  const [gettempcheck,settempcheck]=useState(0)
   const [geterror2, seterror2] = useState('');
 
   const factcalculate = (am, pm) => {
-    if (am >= 0 && pm >= 0 && pm <= 100) {
+    if (pm>=0 &&am >= 0 && pm <= 100) {
       setam(am);
       setpm(pm);
       let Amount = (pm / 100) * am;
@@ -144,10 +147,10 @@ const Historyscreen = ({ navigation }) => {
 
 
   
-  const remove = (key) => {
-    var l = gettemplist.filter((item) => item.key != key);
-    settemplist(l);
-    historylist = l;
+  const deletespecificitem = (key) => {
+    var newlist = gettemplist.filter((listitem) => listitem.key != key);
+    settemplist(newlist);
+    historylist = newlist;
   };
 
 
@@ -162,21 +165,21 @@ const Historyscreen = ({ navigation }) => {
       </View>
       <ScrollView>
         {gettemplist.map((item) => (
-          <TouchableOpacity key={item.key} onPress={() => remove(item.key)}>
+          <TouchableOpacity key={item.key} onPress={() => deletespecificitem(item.key)}>
             <View style={styles.recordrow}>
               <Text style={styles.firstcol}>
-                {' '}
-                {item.OrgAmount}{' '}
+                
+                {item.OrgAmount}
               </Text>
               <Text style={styles.midcol}>
-                {' '}
-                {item.disc}%{' '}
+                
+                {item.disc}%
               </Text>
               <Text style={styles.midcol}>
-                {' '}
-                {item.finalamount}{' '}
+                
+                {item.finalamount}
               </Text>
-              <Text style={styles.lastcol}> X </Text>
+              <Text style={styles.lastcol}> Delete </Text>
             </View>
           </TouchableOpacity>
         ))}
