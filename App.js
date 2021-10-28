@@ -68,6 +68,7 @@ else{
 
   return (
     <View style={styles.container}>
+      //Wrapper Comment: (wrapper contains all content) 
       <View style={styles.wrapper}>
         <TextInput
           style={styles.textfield}
